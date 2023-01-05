@@ -12,30 +12,48 @@
                 <div class="col-lg-12">
                     <h3>create account</h3>
                     <div class="theme-card">
-                        <form class="theme-form">
+                        <form class="theme-form" method="POST">
+                            {% csrf_token %}
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="email">First Name</label>
-                                    <input type="text" class="form-control" id="fname" placeholder="First Name"
-                                        required="">
+                                    {{ form.first_name }}
+                                    <!-- <input type="text" class="form-control" id="fname" placeholder="First Name"
+                                        required=""> -->
                                 </div>
                                 <div class="col-md-6">
                                     <label for="review">Last Name</label>
-                                    <input type="password" class="form-control" id="lname" placeholder="Last Name"
-                                        required="">
+                                    <!-- <input type="password" class="form-control" id="lname" placeholder="Last Name"
+                                        required=""> -->
+                                    {{ form.last_name }}
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="email">email</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                                    <!-- <input type="text" class="form-control" id="email" placeholder="Email" required=""> -->
+                                    {{ form.email }}
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="review">Password</label>
-                                    <input type="password" class="form-control" id="review"
-                                        placeholder="Enter your password" required="">
-                                </div><a href="#" class="btn btn-solid">create Account</a>
+                                    <label for="username">Username</label>
+                                    <!-- <input type="text" class="form-control" id="email" placeholder="Email" required=""> -->
+                                    {{ form.username }}
+                                </div>
                             </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="password1">Password</label>
+                                    <!-- <input type="text" class="form-control" id="email" placeholder="Email" required=""> -->
+                                    {{ form.password1 }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password2">Confirm Password</label>
+                                    <!-- <input type="password" class="form-control" id="review"
+                                        placeholder="Enter your password" required=""> -->
+                                    {{ form.password2 }}
+                                </div>
+                            </div>
+                            <button type='submit' class="btn btn-solid">Create Account</button>
                         </form>
                     </div>
                 </div>
