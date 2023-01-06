@@ -14,46 +14,55 @@
                     <div class="theme-card">
                         <form class="theme-form" method="POST">
                             {% csrf_token %}
+                            {% include 'messages.html' %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <div id="form_errors">
+                                        {% for key, value in form.errors.items %}
+                                            <strong>{{ value }}</strong>
+                                        {% endfor %}
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="email">First Name</label>
                                     {{ form.first_name }}
-                                    <!-- <input type="text" class="form-control" id="fname" placeholder="First Name"
-                                        required=""> -->
                                 </div>
                                 <div class="col-md-6">
                                     <label for="review">Last Name</label>
-                                    <!-- <input type="password" class="form-control" id="lname" placeholder="Last Name"
-                                        required=""> -->
                                     {{ form.last_name }}
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="email">email</label>
-                                    <!-- <input type="text" class="form-control" id="email" placeholder="Email" required=""> -->
                                     {{ form.email }}
                                 </div>
                                 <div class="col-md-6">
                                     <label for="username">Username</label>
-                                    <!-- <input type="text" class="form-control" id="email" placeholder="Email" required=""> -->
                                     {{ form.username }}
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="password1">Password</label>
-                                    <!-- <input type="text" class="form-control" id="email" placeholder="Email" required=""> -->
                                     {{ form.password1 }}
                                 </div>
                                 <div class="col-md-6">
                                     <label for="password2">Confirm Password</label>
-                                    <!-- <input type="password" class="form-control" id="review"
-                                        placeholder="Enter your password" required=""> -->
                                     {{ form.password2 }}
                                 </div>
                             </div>
-                            <button type='submit' class="btn btn-solid">Create Account</button>
+                            <div class="form-row">
+                                <button type='submit' class="btn btn-solid">Create Account</button>
+                                <span class="d-flex align-items-center" style="margin-left: 10px;">
+                                    Do you have an account? <a style="color: var(--theme-deafult); margin-left: 5px; text-decoration: underline;"href="{% url 'login' %}"> Sign in</a>
+                                </span>
+                            </div>
                         </form>
                     </div>
                 </div>

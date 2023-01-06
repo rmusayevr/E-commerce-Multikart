@@ -78,17 +78,17 @@ class LoginView(LoginView):
 class CustomPasswordResetView(PasswordResetView):
     email_template_name = 'email/password_message.html'
     form_class = CustomPasswordResetForm
-    template_name = 'password/password_reset.html'
-    success_url = reverse_lazy('password_reset_done')
+    template_name = 'forget_pwd.html'
+    success_url = reverse_lazy('login')
     
     def get_success_url(self):
         messages.success(self.request, 'Your request to change your password has been registered. Please check your email.')
         return super(CustomPasswordResetView, self).get_success_url()
 
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
-    template_name = 'password/password_reset_confirm.html'
+    template_name = 'reset_pwd.html'
     form_class = CustomSetPasswordForm
-    success_url = reverse_lazy('password_reset_complete')
+    success_url = reverse_lazy('login')
 
     def get_success_url(self):
         messages.success(self.request, 'Your password has been successfully changed!')
@@ -96,18 +96,12 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 class CustomPasswordChangeView(PasswordChangeView):
     form_class = PasswordChangeCustomForm
-    template_name = 'change_password.html'
+    template_name = 'change_pwd.html'
     success_url = reverse_lazy('change_password')
 
     def get_success_url(self):
         messages.success(self.request, 'Your password has been successfully changed!')
         return super(CustomPasswordChangeView, self).get_success_url()
-
-class CustomResetEmailConfirmView(TemplateView):
-    template_name   = "password/password_reset_done.html"
-
-class CustomPasswordResetCompleteView(TemplateView):
-    template_name   = "password/password_reset_complete.html"
     
 def activate(request, uidb64, token):
     uid = force_str(urlsafe_base64_decode(uidb64))
@@ -125,5 +119,3 @@ def activate(request, uidb64, token):
 def profile(request):
     return render(request, 'profile.html')
     
-def forget_pwd(request):
-    return render(request, 'forget_pwd.html')

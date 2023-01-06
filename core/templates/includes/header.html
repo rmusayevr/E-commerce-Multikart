@@ -16,18 +16,30 @@
                         <li class="mobile-wishlist"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
                         </li>
                         <li class="onhover-dropdown mobile-account">
-                            <i class="fa fa-user" aria-hidden="true"></i> My Account
+                            {% if user.is_authenticated %}
+                                <i class="fa fa-user" aria-hidden="true"></i> {{ user.username }}
+                            {% else %}
+                                <i class="fa fa-user" aria-hidden="true"></i> Sign In
+                            {% endif %}
                             <ul class="onhover-show-div">
-                                <li>
-                                    <a href="#" data-lng="en">
-                                        Login
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" data-lng="es">
-                                        Logout
-                                    </a>
-                                </li>
+                                {% if user.is_authenticated %}
+                                    <li>
+                                        <a href="{% url 'logout' %}" data-lng="en">
+                                            Logout
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{% url 'login' %}" data-lng="es">
+                                            Login
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'register' %}" data-lng="es">
+                                            Register
+                                        </a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </li>
                     </ul>
